@@ -218,6 +218,17 @@
         </dependency>
     </dependencies>
 
+	<distributionManagement>
+	   <snapshotRepository>
+	      <id>snapshots</id>
+	      <url>http://13.76.243.188:8081/nexus/content/repositories/snapshots/</url>
+	   </snapshotRepository>
+	   <repository>
+	      <id>releases</id>
+	      <url>http://13.76.243.188:8081/nexus/content/repositories/releases/</url>
+	   </repository>
+	</distributionManagement>
+
     <!-- Maven plugin versions are mentioned in order to guarantee the build reproducibility in the long term -->
     <build>
         <defaultGoal>install</defaultGoal>
@@ -238,6 +249,27 @@
             </testResource>
         </testResources>
         <plugins>
+		
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.5.1</version>
+				<executions>
+					<execution>
+						<id>default-deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<serverId>nexus</serverId>
+					<nexusUrl>http://13.76.243.188:8081/nexus/</nexusUrl>
+					<skipStaging>true</skipStaging>
+				</configuration>
+			</plugin>
+        
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -360,6 +392,19 @@
         </plugins>
     </reporting>
     <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!-- Optional URL to server. Default value is http://localhost:9000 -->
+                <sonar.host.url>
+                  http://13.76.243.188:9000/
+                </sonar.host.url>
+            </properties>
+        </profile>
+    
 		<profile>
 			<id>bower-install</id>
   			<build>
