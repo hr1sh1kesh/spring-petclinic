@@ -5,6 +5,7 @@
 
 <petclinic:layout pageName="home">
     <h2><fmt:message key="Welcome"/></h2>
+    <h2>An application which connects Pet owners to Veterinarians</h2>
     <div class="row">
         <div class="col-md-12">
             <spring:url value="/resources/images/pets.png" htmlEscape="true" var="petsImage"/>
