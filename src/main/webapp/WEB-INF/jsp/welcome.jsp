@@ -4,7 +4,7 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="home">
-    <h2>Welcome</h2>
+    <h2>Welcome to petclinic</h2>
     <h2>Petclinic is an application which connects Pet owners to Veterinarians</h2>
     <div class="row">
         <div class="col-md-12">
